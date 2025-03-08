@@ -7,9 +7,12 @@ const kafka = new Kafka({
     brokers: ['kafka1:9092', 'kafka2:9092']
   })
   
+  //initializing the producer and the consumer instance 
   const producer = kafka.producer()
   const consumer = kafka.consumer({ groupId: 'test-group' })
   
+
+  //running the producer funciton 
   const run = async () => {
     // Producing
     await producer.connect()
@@ -20,7 +23,7 @@ const kafka = new Kafka({
       ],
     })
   
-    // Consuming
+    // Consuming and connecting the consumer assigning the topic and telling if the stream has to start from the beginning or not 
     await consumer.connect()
     await consumer.subscribe({ topic: 'test-topic', fromBeginning: true })
   
